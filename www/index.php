@@ -2,11 +2,19 @@
 
 include_once 'lib/Parsedown.php';
 
+if (str_starts_with($_SERVER['HTTP_HOST'], 'www.')) {
+    $newHost = substr($_SERVER['HTTP_HOST'], 4);
+    $newUrl = "https://$newHost" . $_SERVER['REQUEST_URI'];
+
+    header("Location: $newUrl", true, 301);
+    exit();
+}
+
 $request = $_GET['q'] ?? '';
 
 if ($request != '' && !str_ends_with($request, '/')) {
     header("Location: {$request}/");
-    die();
+    exit();
 }
 
 $redirects = array(
@@ -21,7 +29,7 @@ $redirects = array(
 foreach ($redirects as $key => $value) {
     if (str_starts_with($request, $key)) {
         header('Location: ' . $value);
-        die();
+        exit();
     }
 }
 
