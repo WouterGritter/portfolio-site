@@ -78,16 +78,16 @@ You can find these bridges on my GitHub [here](https://github.com/search?q=owner
 Who doesn't love some gaming with friends? I have Pterodactyl running to be able to quickly make Minecraft servers
 and the odd server for a random Steam game.
 
-# PiHole
+## PiHole
 Goes without saying of course! I have PiHole running in two different VMs, on two different hypervisors for redundancy.
 This has saved me a lot of times already when turning off a hypervisor, because I rely on my custom DNS to connect to them.
 
-# LanCache and APT cache
+## LanCache and APT cache
 I run [LanCache](https://lancache.net/) to cache Steam games and Windows updates, and [AptCacherNg](https://wiki.debian.org/AptCacherNg)
 to cache APT packages. I don't have a very fast WAN connection, so this helps a lot when updating. Also, seeing the multi-gigabit
 speeds when `apt upgrade`-ing and (re)downloading a game is awesome!
 
-# Lots and LOTS of Docker stacks
+## Lots and LOTS of Docker stacks
 The aforementioned services all run in VMs for various reasons, and I try to run most of my self-hosted services
 in Docker when possible. I'll add more information about them on here later, but for now, here's an incomplete list
 of my running stacks:
