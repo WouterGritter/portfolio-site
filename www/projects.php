@@ -4,6 +4,13 @@ include_once "template.php";
 include_once "renderer.php";
 
 template_head_start('Projects');
+?>
+<style>
+    .post {
+        margin-bottom: 2em;
+    }
+</style>
+<?php
 template_head_end();
 
 template_body_start();
@@ -46,17 +53,17 @@ usort($posts, function($a, $b) {
 
 foreach ($posts as $post) {
     ?>
-
-    <h3><?= $post['title'] ?></h3>
-    <p>
-        <em>
-            Posted on <?= $post['postdate'] ?>.
-            <a href="<?= $post['url'] ?>">Read here</a>.
-        </em>
-        <br>
-        <?= $post['description'] ?>
-    </p>
-
+        <div class="post">
+            <h3><?= $post['title'] ?></h3>
+            <p>
+                <em>
+                    Posted on <?= $post['postdate'] ?>.
+                    <a href="<?= $post['url'] ?>">Read here</a>.
+                </em>
+                <br>
+                <?= $post['description'] ?>
+            </p>
+        </div>
     <?php
 }
 
