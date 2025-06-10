@@ -8,10 +8,12 @@ function render_php_file($file): void {
 
 function render_md_file($file): void {
     $md_text = file_get_contents($file);
+
     $md_attributes = extract_md_attributes($md_text);
 
+    $md_text = strip_md_attributes($md_text);
     $md_text = fix_md_links($md_text);
-    $md_text = replace_placeholders($md_text, $md_attributes);
+    $md_text = replace_md_placeholders($md_text, $md_attributes);
 
     $parsedown = new Parsedown();
     $md_html = $parsedown->text($md_text);
@@ -42,6 +44,10 @@ function extract_md_attributes($md_text): array {
     return $metadata;
 }
 
+function strip_md_attributes($md_text): string {
+    return preg_replace('/<!--\s*(\w+)\s*=\s*(.*?)\s*-->/', '', $md_text);
+}
+
 function fix_md_links($md_text): string {
     $pattern = '/\[[^]]+\]\((?<link>.*\.md)\)/';
 
@@ -53,7 +59,7 @@ function fix_md_links($md_text): string {
     return preg_replace_callback($pattern, $replacement, $md_text);
 }
 
-function replace_placeholders($md_text, array $md_attributes): string {
+function replace_md_placeholders($md_text, array $md_attributes): string {
     $pattern = '/@(\w+)/';
 
     $replacement = function ($matches) use ($md_attributes) {
