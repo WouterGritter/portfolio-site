@@ -1,34 +1,43 @@
 <?php
 
-include_once 'lib/Parsedown.php';
-
+// Redirect www to non-www
 if (str_starts_with($_SERVER['HTTP_HOST'], 'www.')) {
+    $scheme = $_SERVER['REQUEST_SCHEME'] ?? 'http';
     $newHost = substr($_SERVER['HTTP_HOST'], 4);
-    $newUrl = "https://$newHost" . $_SERVER['REQUEST_URI'];
+    $newUrl = "$scheme://$newHost" . $_SERVER['REQUEST_URI'];
 
     header("Location: $newUrl", true, 301);
     exit();
 }
 
-$request = $_GET['q'] ?? '';
+$request = $_SERVER['DOCUMENT_URI'] ?? '';
+$request = '/' . trim($request, '/');
 
-if ($request != '' && !str_ends_with($request, '/')) {
-    header("Location: {$request}/");
-    exit();
+$remove_extensions = ['.php', '.md', '.htm', '.html'];
+
+// Remove any extensions from url if present
+foreach ($remove_extensions as $extension) {
+    if (str_ends_with($request, $extension)) {
+        $newPath = substr($request, 0, -strlen($extension));
+        header("Location: $newPath", true, 301);
+        exit();
+    }
 }
 
 $redirects = array(
     '/index' => '/',
-    '/my-latest-posts/' => '/blog/',
-    '/2019/01/29/esp8266-lamp-project/' => '/posts/esp8266-lamp-project/',
-    '/2020/07/14/advanced-csgo-in-real-life-bomb/' => '/posts/csgo-bomb-irl/',
-    '/2020/07/21/how-i-got-the-csgo-bomb-beep-pattern/' => '/posts/csgo-bomb-beep-pattern/',
-    '/2020/07/22/wrapping-up-the-csgo-bomb-project/' => '/posts/csgo-bomb-wrapping-up/',
+    '/my-latest-posts' => '/projects/',
+    '/blog' => '/projects/',
+    '/2019/01/29/esp8266-lamp-project' => '/posts/esp8266-lamp-project/',
+    '/2020/07/14/advanced-csgo-in-real-life-bomb' => '/posts/csgo-bomb-irl/',
+    '/2020/07/21/how-i-got-the-csgo-bomb-beep-pattern' => '/posts/csgo-bomb-beep-pattern/',
+    '/2020/07/22/wrapping-up-the-csgo-bomb-project' => '/posts/csgo-bomb-wrapping-up/',
 );
 
+// Apply any redirect in $redirects map
 foreach ($redirects as $key => $value) {
     if (str_starts_with($request, $key)) {
-        header('Location: ' . $value);
+        header("Location: $value", true, 301);
         exit();
     }
 }
@@ -43,74 +52,12 @@ if ($request == '') {
 $php_file = __DIR__ . '/' . $request . '.php';
 $md_file = __DIR__ . '/' . $request . '.md';
 
+include_once "renderer.php";
+
 if ($request != 'index' && file_exists($php_file)) {
     render_php_file($php_file);
-} else if(file_exists($md_file)) {
+} else if (file_exists($md_file)) {
     render_md_file($md_file);
 } else {
     render_404();
-}
-
-function render_php_file($file): void {
-    include $file;
-}
-
-function render_md_file($file): void {
-    $md_text = file_get_contents($file);
-    $md_text = fix_md_links($md_text);
-
-    $parsedown = new Parsedown();
-    $md_html = $parsedown->text($md_text);
-
-    $md_attributes = extract_md_attributes($md_text);
-
-    include "template.php";
-
-    template_head_start($md_attributes['title'] ?? get_pretty_file_name($file));
-    template_head_end();
-
-    template_body_start();
-    echo $md_html;
-    template_body_end();
-}
-
-function extract_md_attributes($md_text): array {
-    $metadata = [];
-
-    $pattern = '/<!--\s*(\w+)\s*=\s*(.*?)\s*-->/';
-
-    if (preg_match_all($pattern, $md_text, $matches, PREG_SET_ORDER)) {
-        foreach ($matches as $match) {
-            $key = $match[1];
-            $value = $match[2];
-            $metadata[$key] = $value;
-        }
-    }
-
-    return $metadata;
-}
-
-function fix_md_links($md_text): string {
-    $pattern = '/\[[^]]+\]\((?<link>.*\.md)\)/';
-
-    $replacement = function ($matches) {
-        $newLink = str_replace('.md', '/', $matches['link']);
-        return str_replace($matches['link'], $newLink, $matches[0]);
-    };
-
-    return preg_replace_callback($pattern, $replacement, $md_text);
-}
-
-function get_pretty_file_name($path): string {
-    $name = basename($path);
-    $name = pathinfo($name, PATHINFO_FILENAME);
-    $name = str_replace(['-', '_'], ' ', $name);
-    $name = ucfirst($name);
-
-    return $name;
-}
-
-function render_404(): void {
-    header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
-    echo '404 Not Found';
 }

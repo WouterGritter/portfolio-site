@@ -61,7 +61,6 @@ function template_body_start() {
             <a href="/">Home</a>
             <a href="/homelab/">My Homelab</a>
             <a href="/projects/">Projects</a>
-            <a href="/blog/">Blog</a>
             <a href="/contact/">Contact/Where to Find Me</a>
         </div>
         <div class="content-container">

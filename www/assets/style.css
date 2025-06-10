@@ -89,6 +89,7 @@ body {
 .content h1 {
     font-size: 1.65em;
     color: #ffffff;
+    margin-top: 0;
 }
 
 .content h2 {
@@ -144,9 +145,10 @@ body {
 
 @media (max-width: 1024px) {
     .content {
-        margin-top: 11em;
+        margin-top: 12em;
         margin-left: 1em;
         margin-right: 1em;
+        padding: 30px;
     }
 
     .content img {
