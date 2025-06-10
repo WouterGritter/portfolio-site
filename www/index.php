@@ -53,6 +53,9 @@ $php_file = __DIR__ . '/' . $request . '.php';
 $md_file = __DIR__ . '/' . $request . '.md';
 
 include_once "renderer.php";
+include_once 'lib/TinyHtmlMinifier.php';
+
+ob_start();
 
 if ($request != 'index' && file_exists($php_file)) {
     render_php_file($php_file);
@@ -61,3 +64,8 @@ if ($request != 'index' && file_exists($php_file)) {
 } else {
     render_404();
 }
+
+$html = ob_get_clean();
+
+$minifier = new TinyHtmlMinifier([]);
+echo $minifier->minify($html);
