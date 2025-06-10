@@ -1,6 +1,6 @@
 services:
   nginx-php:
-    image: trafex/php-nginx:latest
+    build: '.'
     volumes:
       - ./www:/var/www/html
     ports:

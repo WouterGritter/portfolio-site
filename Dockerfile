@@ -1,6 +1,9 @@
 # Use the trafex/php-nginx base image
 FROM trafex/php-nginx:latest
 
+# Copy over the default nginx config file
+COPY ./default.conf /etc/nginx/conf.d/default.conf
+
 # Set working directory
 WORKDIR /var/www/html
 
