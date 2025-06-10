@@ -1,9 +1,11 @@
-# Wrapping up the CS:GO bomb project
-
 <!-- title = CS:GO Bomb Wrapping Up -->
+<!-- longtitle = Wrapping up the CS:GO bomb project -->
+<!-- postdate = 22th of July 2020 -->
+<!-- description = Finishing the ESP-based CS:GO bomb! -->
 
-_Posted on 22th of July 2020._
+# @longtitle
 
+_Posted on @postdate._
 
 ## The making of
 

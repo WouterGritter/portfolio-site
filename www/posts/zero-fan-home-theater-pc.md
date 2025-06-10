@@ -1,8 +1,11 @@
-# Zero-fan, GTX 1060 powered Home Theater PC
-
 <!-- title = Zero-fan Home Theater PC -->
+<!-- longtitle = Zero-fan, GTX 1060 powered Home Theater PC -->
+<!-- postdate = 9th of August 2020 -->
+<!-- description = Building a home theater "PC" with a fanless setup. -->
 
-_Posted on 9th of August 2020._
+# @longtitle
+
+_Posted on @postdate._
 
 ![](/assets/home-theater-desktop.jpg)
 

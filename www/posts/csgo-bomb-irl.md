@@ -1,8 +1,11 @@
-# Advanced CS:GO in-real-life bomb
-
 <!-- title = Building IRL CS:GO Bomb -->
+<!-- longtitle = Advanced CS:GO in-real-life bomb -->
+<!-- postdate = 14th of July 2020 -->
+<!-- description = Making an ESP-based CS:GO bomb for a laser game party! -->
 
-_Posted on 14th of July 2020._
+# @longtitle
+
+_Posted on @postdate._
 
 ![](/assets/csgo-bomb-completed.jpg)
 

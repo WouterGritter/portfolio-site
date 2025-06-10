@@ -1,9 +1,11 @@
-# How I got the CS:GO bomb beep pattern
-
 <!-- title = CS:GO Bomb Beep Pattern -->
+<!-- longtitle = How I got the CS:GO bomb beep pattern -->
+<!-- postdate = 21th of July 2020 -->
+<!-- description = A write-up on how I generated a formula that fits the CS:GO bomb beeping pattern. -->
 
-_Posted on 21th of July 2020._
+# @longtitle
 
+_Posted on @postdate._
 
 ## The formula
 

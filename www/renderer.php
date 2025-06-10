@@ -8,12 +8,13 @@ function render_php_file($file): void {
 
 function render_md_file($file): void {
     $md_text = file_get_contents($file);
+    $md_attributes = extract_md_attributes($md_text);
+
     $md_text = fix_md_links($md_text);
+    $md_text = replace_placeholders($md_text, $md_attributes);
 
     $parsedown = new Parsedown();
     $md_html = $parsedown->text($md_text);
-
-    $md_attributes = extract_md_attributes($md_text);
 
     include "template.php";
 
@@ -47,6 +48,20 @@ function fix_md_links($md_text): string {
     $replacement = function ($matches) {
         $newLink = str_replace('.md', '/', $matches['link']);
         return str_replace($matches['link'], $newLink, $matches[0]);
+    };
+
+    return preg_replace_callback($pattern, $replacement, $md_text);
+}
+
+function replace_placeholders($md_text, array $md_attributes): string {
+    $pattern = '/@(\w+)/';
+
+    $replacement = function ($matches) use ($md_attributes) {
+        $placeholder = $matches[1];
+        if (array_key_exists($placeholder, $md_attributes)) {
+            return $md_attributes[$placeholder];
+        }
+        return $matches[0];
     };
 
     return preg_replace_callback($pattern, $replacement, $md_text);

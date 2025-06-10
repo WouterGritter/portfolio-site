@@ -1,8 +1,11 @@
-# ESP8266 lamp project
-
 <!-- title = ESP8266 lamp project -->
+<!-- longtitle = ESP8266 lamp project -->
+<!-- postdate = 29th of January 2019 -->
+<!-- description = My journey to build a completely DIY and custom IoT relay to control lights. -->
 
-_Posted on 29th of January 2019._
+# @longtitle
+
+_Posted on @postdate._
 
 Some time ago my dad and I made a couple of WiFi controlled lamps, with the help of the ESP8266 micro-controller.
 It's a completely DIY project, and I wrote my own software for both the ESP's, and the control server is running on
