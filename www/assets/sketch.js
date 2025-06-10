@@ -4,6 +4,8 @@ const sqPixelsPerDot = 200 * 200;
 const minDist = 100;
 const mouseRepelDist = 200;
 
+const dotSpeed = 0.25;
+
 const dots = [];
 
 const [red, green, blue] = getBodyBackgroundColor();
@@ -61,8 +63,8 @@ function randomDot() {
     return new Dot(
         random(width),
         random(height),
-        random(-1, 1),
-        random(-1, 1),
+        random(-1, 1) * dotSpeed,
+        random(-1, 1) * dotSpeed,
     );
 }
 
