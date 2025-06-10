@@ -32,7 +32,7 @@ foreach (scandir($posts_dir) as $file) {
     $parsed_postdate = $date = DateTime::createFromFormat('jS \o\f F Y', $file_attributes['postdate']);
 
     $posts[] = array(
-        'url' => str_replace('.md', '/', $file_path),
+        'url' => '/' . str_replace('.md', '/', $file_path),
         'title' => $file_attributes['longtitle'] ?? $file_attributes['title'] ?? substr($file, 0, -3),
         'postdate' => $file_attributes['postdate'] ?? 'Unknown',
         'description' => $file_attributes['description'] ?? '<br>',
