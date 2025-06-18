@@ -1,7 +1,7 @@
 <!-- title = WeeWX MQTT driver -->
 <!-- longtitle = Collecting weather data from MQTT in WeeWX using a custom driver -->
 <!-- postdate = 26th of January 2025 -->
-<!-- description = Testing the performance of Minecraft servers on various (cheap) VPSs and other hosts. -->
+<!-- description = Instructions on how to use my custom MQTT weather station driver in WeeWX. -->
 
 # @longtitle
 
