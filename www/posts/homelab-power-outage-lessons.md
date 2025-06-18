@@ -26,7 +26,7 @@ This had a cascading effect: since the VM disks live on the NAS, nothing that de
 
 #### Internet was up, but DNS was down
 
-TODO: Jeff Geetling IT WAS DNS
+[As Jeff Geerling always says...](https://x.com/geerlingguy/status/1469769657200648193)
 
 The network came back up, and I had internet access. However, internal and external DNS resolution was completely broken. This caused problems like:
 - Not being able to reach either of my Proxmox hypervisors by hostname.
