@@ -4,20 +4,43 @@ const sqPixelsPerDot = 200 * 200;
 const minDist = 100;
 const mouseRepelDist = 200;
 
-const dotBrightness = 20;
-const lineBrightness = 180;
+let dotBrightness = 20;
+let lineBrightness = 180;
 
 const dotSpeed = 0.25;
 
 const dots = [];
 
-const [red, green, blue] = getBodyBackgroundColor();
+let [red, green, blue] = getBodyBackgroundColor();
+
+function setDarkTheme(darkTheme) {
+    if (darkTheme) {
+        document.body.classList.add('dark-theme');
+
+        dotBrightness = 255;
+        lineBrightness = 200;
+    } else {
+        document.body.classList.remove('dark-theme');
+
+        dotBrightness = 20;
+        lineBrightness = 180;
+    }
+
+    [red, green, blue] = getBodyBackgroundColor();
+}
+
+function toggleDarkTheme() {
+    const current = document.body.classList.contains('dark-theme');
+    setDarkTheme(!current);
+}
 
 function setup() {
     const canvas = createCanvas(windowWidth, windowHeight);
     canvas.parent('background');
 
     calibrateDotDensity();
+
+    setDarkTheme(false);
 }
 
 function draw() {

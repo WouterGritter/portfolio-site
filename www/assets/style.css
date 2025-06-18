@@ -1,11 +1,48 @@
+:root {
+    /* Light Theme (Default) */
+    --background-color: #ffffff;
+    --text-color: #333333;
+    --header-color: #222222;
+    --sub-header-color: #666666;
+    --pipe-color: #cccccc;
+    --link-color: #007bff;
+    --link-hover-color: #007bff;
+    --content-bg: rgba(255, 255, 255, 0.95);
+    --content-shadow: rgba(0, 0, 0, 0.1);
+    --heading-color: #111111;
+    --h6-color: #555555;
+    --p-color: #555555;
+    --table-border: #dddddd;
+    --table-th-bg: #f0f0f0;
+    --table-td-bg: #ffffff;
+}
+
+.dark-theme {
+    --background-color: #040404;
+    --text-color: #f5f5f5;
+    --header-color: #f5f5f5;
+    --sub-header-color: #b3b3b3;
+    --pipe-color: #808080;
+    --link-color: #529bfa;
+    --link-hover-color: #ff9800;
+    --content-bg: rgba(12, 12, 12, 0.95);
+    --content-shadow: rgba(0, 0, 0, 0.7);
+    --heading-color: #ffffff;
+    --h6-color: #777;
+    --p-color: #e0e0e0;
+    --table-border: #f0f0f0;
+    --table-th-bg: #444;
+    --table-td-bg: #1a1a1a;
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', 'Arial';
-    background-color: #040404; /* Dark background */
-    color: #f5f5f5; /* Light text */
-    overflow-y: scroll; /* Enable vertical scrolling */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    background-color: var(--background-color);
+    color: var(--text-color);
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .background {
@@ -15,7 +52,7 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: -1; /* Ensure the background is below content */
+    z-index: -1;
 }
 
 .header {
@@ -25,6 +62,7 @@ body {
     font-size: 28px;
     font-weight: bold;
     letter-spacing: 1px;
+    color: var(--header-color);
 }
 
 .header-icon {
@@ -37,11 +75,11 @@ body {
     font-weight: 300;
     margin-top: 5px;
     letter-spacing: 1px;
-    color: #b3b3b3; /* Light gray for sub-header */
+    color: var(--sub-header-color);
 }
 
 .pipe {
-    color: #808080; /* Darker gray for the pipes */
+    color: var(--pipe-color);
 }
 
 .nav-links {
@@ -55,13 +93,13 @@ body {
 .nav-links a {
     display: block;
     margin-bottom: 15px;
-    color: #f5f5f5;
+    color: var(--text-color);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
-    color: #ff9800; /* Accent color on hover */
+    color: var(--link-hover-color);
 }
 
 .content-container {
@@ -69,62 +107,58 @@ body {
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
-    padding-top: 7em; /* Space for header */
+    padding-top: 7em;
     padding-bottom: 50px;
     box-sizing: border-box;
 }
 
 .content {
-    padding: 40px; /* Increased padding */
+    padding: 40px;
     margin-left: 18em;
     margin-right: 8em;
     width: 100%;
     min-height: 30em;
-    background-color: rgba(12, 12, 12, 0.95); /* Semi-transparent background */
-    border-radius: 15px; /* Increased border-radius */
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.7); /* Enhanced shadow */
-    z-index: 10; /* Ensures content is above the p5.js canvas */
+    background-color: var(--content-bg);
+    border-radius: 15px;
+    box-shadow: 0px 0px 30px var(--content-shadow);
+    z-index: 10;
 }
 
 .content h1 {
     font-size: 1.65em;
-    color: #ffffff;
+    color: var(--heading-color);
     margin-top: 0;
 }
 
 .content h2 {
     font-size: 1.4em;
-    color: #ffffff;
+    color: var(--heading-color);
 }
 
 .content h3 {
     font-size: 1.15em;
-    color: #ffffff;
+    color: var(--heading-color);
 }
 
-.content h4 {
-    font-size: 1em;
-    color: #ffffff;
-}
-
+.content h4,
 .content h5 {
     font-size: 1em;
-    color: #ffffff;
+    color: var(--heading-color);
 }
 
 .content h6 {
     font-size: 1em;
-    color: #777;
+    color: var(--h6-color);
 }
 
 .content p {
     font-size: 1em;
     line-height: 1.8;
-    color: #e0e0e0;
+    color: var(--p-color);
 }
 
 .content a {
-    color: #529bfa;
+    color: var(--link-color);
     text-decoration: none;
 }
 
@@ -145,8 +179,8 @@ body {
 
 .content table th,
 .content table td {
-    border-top: 1px solid #f0f0f0;
-    border-bottom: 1px solid #f0f0f0;
+    border-top: 1px solid var(--table-border);
+    border-bottom: 1px solid var(--table-border);
     border-left: none;
     border-right: none;
     padding: 8px 12px;
@@ -154,12 +188,12 @@ body {
 }
 
 .content table th {
-    background-color: #444;
+    background-color: var(--table-th-bg);
     font-weight: bold;
 }
 
 .content table td {
-    background-color: #1a1a1a;
+    background-color: var(--table-td-bg);
 }
 
 @keyframes fadeIn {
@@ -178,4 +212,57 @@ body {
     .content img {
         max-width: 100%;
     }
+}
+
+.theme-switch {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+/* When checked */
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Optional: shadow or glow effect */
+.slider:before {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
 }
