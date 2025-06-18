@@ -1,6 +1,6 @@
 <!-- title = Minecraft VPS performace testing -->
 <!-- longtitle = Minecraft server performance testing on VPSs -->
-<!-- postdate = 18th of June 2024 -->
+<!-- postdate = 18th of June 2025 -->
 <!-- description = Testing the performance of Minecraft servers on various (cheap) VPSs and other hosts. -->
 
 # @longtitle
