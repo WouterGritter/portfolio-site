@@ -46,7 +46,7 @@ $request = trim($request, '/');
 $request = str_replace(['../', './'], '', $request);
 
 if ($request == '') {
-    $request = 'index';
+    $request = 'home';
 }
 
 $php_file = __DIR__ . '/' . $request . '.php';

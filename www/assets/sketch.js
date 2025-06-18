@@ -4,6 +4,9 @@ const sqPixelsPerDot = 200 * 200;
 const minDist = 100;
 const mouseRepelDist = 200;
 
+const dotBrightness = 20;
+const lineBrightness = 180;
+
 const dotSpeed = 0.25;
 
 const dots = [];
@@ -120,13 +123,13 @@ class Dot {
             if (distSq < minDist * minDist) {
                 const dist = sqrt(distSq);
                 const alpha = map(dist, 0, minDist, 255, 0);
-                stroke(200, alpha);
+                stroke(lineBrightness, alpha);
                 line(this.x, this.y, other.x, other.y);
             }
         }
 
         noStroke();
-        fill(255);
+        fill(dotBrightness);
         ellipse(this.x, this.y, 4);
     }
 
