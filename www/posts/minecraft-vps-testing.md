@@ -7,11 +7,20 @@
 
 _Posted on @postdate._
 
-I've been messing around with testing Minecraft server performance on various VPS hosts (and a few non-VPS systems too), mainly to see how they handle chunk generation. I'm using Spigot 1.21.5 with the [Fast Chunk Pregenerator](https://www.spigotmc.org/resources/fast-chunk-pregenerator.74429/) plugin.
+I've been messing around with testing Minecraft server performance on various VPS hosts (and a few non-VPS systems too),
+mainly to see how they handle chunk generation. I'm using Spigot 1.21.5 with the
+[Fast Chunk Pregenerator](https://www.spigotmc.org/resources/fast-chunk-pregenerator.74429/) plugin,
+running the `openjdk-21-jre-headless` JVM.
 
-The main reason I'm doing this is because I'm currently self-hosting a private survival Minecraft server, and I'm trying to figure out if I should keep doing that or switch to a VPS host instead. My current setup is fine for the most part, but the biggest limitation is network bandwidth—especially when a few people are online at once. A cheap but performant VPS might be a better option if I can find one that handles chunk generation well.
+The main reason I'm doing this is because I'm currently self-hosting a private survival Minecraft server,
+and I'm trying to figure out if I should keep doing that or switch to a VPS host instead. My current setup is
+fine for the most part, but the biggest limitation is network bandwidth—especially when a few people are online
+at once. A cheap but performant VPS might be a better option if I can find one that handles chunk generation well.
 
-I'm using chunk generation as a benchmark because it's usually the most demanding task a Minecraft server has to deal with. In survival servers, especially later in the game when people are flying around in elytras at high speeds, servers need to generate and send chunks constantly. If a system can handle that smoothly, it'll probably handle everything else just fine.
+I'm using chunk generation as a benchmark because it's usually the most demanding task a Minecraft server has to
+deal with. In survival servers, especially later in the game when people are flying around in elytras at high speeds,
+servers need to generate and send chunks constantly. If a system can handle that smoothly, it'll probably
+handle everything else just fine.
 
 ### Setup
 - **Server software:** Spigot 1.21.5
@@ -24,19 +33,19 @@ I used chunk generation speed (chunks per second) as the main benchmark.
 ## Results
 
 ### Hetzner VPSes (paid)
-| Name      | CPU             | Cores | RAM (MC)  | Price (€/mo) | Chunks/sec |
-|-----------|-----------------|-------|-----------|--------------|------------|
-| **CPX31** | AMD (shared)    | 4     | 8GB (6GB) | €15.85       | **16.87**  |
-| **CCX13** | AMD (dedicated) | 2     | 8GB (6GB) | €14.51       | 14.08      |
-| **CAX21** | ARM64 (Ampere)  | 4     | 8GB (6GB) | €7.25        | 11.85      |
-| **CX32**  | Intel (shared)  | 4     | 8GB (6GB) | €7.62        | 6.68       |
+| Name      | CPU             | Cores | RAM (MC)  | Price (€/mo) | Chunks/sec | Cost efficiency <br> (Chunks/sec per €/mo) |
+|-----------|-----------------|-------|-----------|--------------|------------|--------------------------------------------|
+| **CPX31** | AMD (shared)    | 4     | 8GB (6GB) | €15.85       | **16.87**  | 1.06                                       |
+| **CCX13** | AMD (dedicated) | 2     | 8GB (6GB) | €14.51       | 14.08      | 0.97                                       |
+| **CAX21** | ARM64 (Ampere)  | 4     | 8GB (6GB) | €7.25        | 11.85      | **1.63**                                   |
+| **CX32**  | Intel (shared)  | 4     | 8GB (6GB) | €7.62        | 6.68       | 0.88                                       |
 
 ### Other Systems (just for fun)
 | Name             | CPU          | Cores | RAM (MC)   | Platform              | Chunks/sec |
 |------------------|--------------|-------|------------|-----------------------|------------|
-| **Dell R330**    | E3-1240 v5   | 4     | 8GB (6GB)  | Virtualized (proxmox) | 13.40      |
+| **Dell R330**    | E3-1240 v5   | 4     | 8GB (6GB)  | Virtualized (Proxmox) | 13.40      |
 | **Dell R730xd**  | E5-2697A v4  | 4     | 8GB (6GB)  | Virtualized (ESXI)    | 14.08      |
-| **Asus Zenbook** | Ultra 9 185H | Many  | 32GB (6GB) | Windows (baremetal)   | 14.51      |
+| **Asus Zenbook** | Ultra 9 185H | Many  | 32GB (6GB) | Bare metal (Windows)  | 14.51      |
 
 ## Notes
 - **CPX31** is the top performer among Hetzner VPSes. Not bad for a shared-core VM.
