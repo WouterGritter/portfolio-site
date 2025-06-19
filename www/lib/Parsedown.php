@@ -1014,11 +1014,25 @@ class Parsedown
             'elements' => $HeaderElements,
         );
 
-        return $Block;
+        $wrapper = [
+            'name' => 'div',
+            'attributes' => [
+                'class' => 'table-wrapper',
+            ],
+            'elements' => [ $Block ],
+        ];
+
+        return [
+            'alignments' => $alignments,
+            'identified' => true,
+            'element' => $wrapper,
+        ];
     }
 
-    protected function blockTableContinue($Line, array $Block)
+    protected function blockTableContinue($Line, array $wrapper)
     {
+        $Block = $wrapper['element']['elements'][0];
+
         if (isset($Block['interrupted']))
         {
             return;
@@ -1067,7 +1081,8 @@ class Parsedown
 
             $Block['element']['elements'][1]['elements'] []= $Element;
 
-            return $Block;
+            $wrapper['element']['elements'][0] = $Block;
+            return $wrapper;
         }
     }
 

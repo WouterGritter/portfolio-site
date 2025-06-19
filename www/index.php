@@ -51,6 +51,7 @@ if ($request == '') {
 
 $php_file = __DIR__ . '/' . $request . '.php';
 $md_file = __DIR__ . '/' . $request . '.md';
+$html_file = __DIR__ . '/' . $request . '.html';
 
 include_once "renderer.php";
 include_once 'lib/TinyHtmlMinifier.php';

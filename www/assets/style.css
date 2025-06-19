@@ -35,6 +35,10 @@
     --table-td-bg: #1a1a1a;
 }
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -107,17 +111,18 @@ body {
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
-    padding-top: 7em;
+    margin-top: 7em;
     padding-bottom: 50px;
+    margin-left: 17em;
+    margin-right: 8em;
     box-sizing: border-box;
 }
 
 .content {
     padding: 40px;
-    margin-left: 18em;
-    margin-right: 8em;
+    margin: 0 auto;
     width: 100%;
-    min-height: 30em;
+    /*max-width: 1000px;*/
     background-color: var(--content-bg);
     border-radius: 15px;
     box-shadow: 0px 0px 30px var(--content-shadow);
@@ -172,6 +177,11 @@ body {
     flex-direction: column;
 }
 
+.content .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
 .content table {
     width: 100%;
     border-collapse: collapse;
@@ -203,10 +213,13 @@ body {
 
 @media (max-width: 1024px) {
     .content {
-        margin-top: 12em;
-        margin-left: 1em;
-        margin-right: 1em;
-        padding: 30px;
+        padding: 20px;
+    }
+
+    .content-container {
+        margin-top: 17em;
+        margin-left: 0.75em;
+        margin-right: 0.75em;
     }
 
     .content img {
