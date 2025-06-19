@@ -43,6 +43,7 @@ I used chunk generation speed (chunks per second) as the main benchmark.
 ### Other Systems (just for fun)
 | Name             | CPU          | Cores | RAM (MC)   | Platform              | Chunks/sec |
 |------------------|--------------|-------|------------|-----------------------|------------|
+| **Dell R330**    | E3-1280 v6   | 4     | 8GB (6GB)  | Virtualized (Proxmox) | 16.86      |
 | **Dell R330**    | E3-1240 v5   | 4     | 8GB (6GB)  | Virtualized (Proxmox) | 13.40      |
 | **Dell R730xd**  | E5-2697A v4  | 4     | 8GB (6GB)  | Virtualized (ESXI)    | 14.08      |
 | **Asus Zenbook** | Ultra 9 185H | Many  | 32GB (6GB) | Bare metal (Windows)  | 14.51      |
