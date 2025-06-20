@@ -84,5 +84,5 @@ function get_pretty_file_name($path): string {
 
 function render_404(): void {
     header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
-    echo '404 Not Found';
+    render_md_file('404.md');
 }
