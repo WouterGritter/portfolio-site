@@ -1,7 +1,7 @@
 # Homelab!
 
 ![](/assets/homelab-rack.png)
-_Slightly outdated, doesn't include 10G switch_
+_Slightly outdated, doesn't include 10G switch and recent CPU upgrades._
 
 From top to bottom, my homelab contains the following hardware:
 - `sw-serverroompoe`: 16-port PoE switch (TP-Link TL-SG1016PE)
