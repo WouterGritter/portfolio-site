@@ -45,10 +45,6 @@ function template_head_end() {
 function template_body_start() {
     ?>
     <body>
-        <div class="background" id="background">
-            <!-- p5.js canvas will be placed here -->
-        </div>
-
         <div class="header">
             <div>
                 <img class="header-icon" src="/assets/favicon-64x64.png">
@@ -72,8 +68,6 @@ function template_body_end() {
     ?>
             </div>
         </div>
-
-        <script src="/assets/sketch.js?2"></script>
     </body>
     </html>
     <?php
