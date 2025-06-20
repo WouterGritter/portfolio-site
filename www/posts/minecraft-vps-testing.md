@@ -46,14 +46,15 @@ I used chunk generation speed (chunks per second) as the main benchmark.
 | **Dell R330**    | E3-1280 v6   | 4     | 8GB (6GB)  | Virtualized (Proxmox) | 16.86      |
 | **Dell R330**    | E3-1240 v5   | 4     | 8GB (6GB)  | Virtualized (Proxmox) | 13.40      |
 | **Dell R730xd**  | E5-2697A v4  | 4     | 8GB (6GB)  | Virtualized (ESXI)    | 14.08      |
-| **Asus Zenbook** | Ultra 9 185H | Many  | 32GB (6GB) | Bare metal (Windows)  | 14.51      |
+| **Asus Zenbook** | Ultra 9 185H | Many  | 32GB (6GB) | Bare metal (Windows)  | 22.10*     |
 
 ## Notes
 - **CPX31** is the top performer among Hetzner VPSes. Not bad for a shared-core VM.
 - **CCX13** performs really well considering it only has 2 cores—but they're dedicated.
 - **CAX21** (ARM) gives surprisingly solid results for its low price. Definitely good value.
 - **CX32** is... not great. Maybe older CPUs or just less efficient in this context.
-- I'm really surprised how well my [10 year old](https://www.intel.com/content/www/us/en/products/sku/88176/intel-xeon-processor-e31240-v5-8m-cache-3-50-ghz/specifications.html) (currently worth [20 euro](https://www.ebay.nl/sch/i.html?_nkw=Intel+Xeon+E3-1240+v5+cpu&_sacat=0&_from=R40&_trksid=m570.l1313&_odkw=E3-1240+v5+cpu&_osacat=0)) CPU is doing, compared to the VPS solutions out there.
+- I'm really surprised how well my E3-1240 v5, a [10 year old](https://www.intel.com/content/www/us/en/products/sku/88176/intel-xeon-processor-e31240-v5-8m-cache-3-50-ghz/specifications.html) (currently worth [20 euro](https://www.ebay.nl/sch/i.html?_nkw=Intel+Xeon+E3-1240+v5+cpu&_sacat=0&_from=R40&_trksid=m570.l1313&_odkw=E3-1240+v5+cpu&_osacat=0)) CPU is doing, compared to the VPS solutions out there.
+- \* The result for the Ultra 9 185H should be taken with a grain of salt. In earlier runs I got inconsistent, much lower numbers. Since it's just running on my Windows laptop, this could've been caused by any number of things, like Windows updating or performing a virus scan in the background...
 
 ---
 

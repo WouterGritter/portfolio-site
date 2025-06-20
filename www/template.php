@@ -20,6 +20,8 @@ function template_head_start($title) {
             gtag('config', 'G-HFTES63JGM');
         </script>
 
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2840255380088642" crossorigin="anonymous"></script>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js"></script>
 
         <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
