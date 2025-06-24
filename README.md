@@ -6,4 +6,4 @@ to HTML using [Parsedown](https://parsedown.org/). These Markdown files are conv
 inefficient but an optimization I'll work on in the future. The site runs in Docker, so hopefully any security issues are
 limited to a DOS attack on the site, rather than compromising the webserver.
 
-See the active website on [gritter.me](https://gritter.me/).
+See the active website on [gritter.nl](https://gritter.nl/).

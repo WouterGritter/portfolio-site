@@ -67,7 +67,7 @@ usort($posts, function($a, $b) {
     return $b['parsed_postdate'] <=> $a['parsed_postdate'];
 });
 
-$posts = array_slice($posts, 0, 3);
+$posts = array_slice($posts, 0, 4);
 ?>
 
 <ul>
