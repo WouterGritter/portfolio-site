@@ -33,12 +33,12 @@ I used chunk generation speed (chunks per second) as the main benchmark.
 ## Results
 
 ### Hetzner VPSes (paid)
-| Name      | CPU             | Cores | RAM (MC)  | Price (€/mo) | Chunks/sec | Cost efficiency <br> (Chunks/sec per €/mo) |
-|-----------|-----------------|-------|-----------|--------------|------------|--------------------------------------------|
-| **CPX31** | AMD (shared)    | 4     | 8GB (6GB) | €15.85       | **16.87**  | 1.06                                       |
-| **CCX13** | AMD (dedicated) | 2     | 8GB (6GB) | €14.51       | 14.08      | 0.97                                       |
-| **CAX21** | ARM64 (Ampere)  | 4     | 8GB (6GB) | €7.25        | 11.85      | **1.63**                                   |
-| **CX32**  | Intel (shared)  | 4     | 8GB (6GB) | €7.62        | 6.68       | 0.88                                       |
+| Name                                                 | CPU             | Cores | RAM (MC)  | Price (€/mo) | Chunks/sec | Cost efficiency <br> (Chunks/sec per €/mo) |
+|------------------------------------------------------|-----------------|-------|-----------|--------------|------------|--------------------------------------------|
+| **[CPX31](https://hetzner.cloud/?ref=t7xv8IObgV1b)** | AMD (shared)    | 4     | 8GB (6GB) | €15.85       | **16.87**  | 1.06                                       |
+| **[CCX13](https://hetzner.cloud/?ref=t7xv8IObgV1b)** | AMD (dedicated) | 2     | 8GB (6GB) | €14.51       | 14.08      | 0.97                                       |
+| **[CAX21](https://hetzner.cloud/?ref=t7xv8IObgV1b)** | ARM64 (Ampere)  | 4     | 8GB (6GB) | €7.25        | 11.85      | **1.63**                                   |
+| **[CX32](https://hetzner.cloud/?ref=t7xv8IObgV1b)**  | Intel (shared)  | 4     | 8GB (6GB) | €7.62        | 6.68       | 0.88                                       |
 
 ### Other Systems (just for fun)
 | Name             | CPU          | Cores | RAM (MC)   | Platform              | Chunks/sec |
