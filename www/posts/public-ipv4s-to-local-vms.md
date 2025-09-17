@@ -188,6 +188,16 @@ anything going to `203.0.113.55` - it'll go straight to your VM.
 
 ---
 
+### Adding more public IPv4's
+
+To add more public IPv4's to other internal hosts, just go through every step and repeat or add to each step referencing `203.0.113.55`.
+A high-level overview to add another IP (`203.0.113.60`):
+- Add `203.0.113.60` to `AllowedIPs` in the VPS's WireGuard config.
+- Add `203.0.113.60` to a second internal VM, just like described in the steps above.
+- Add a second gateway in pfsense - `vwan_internal_60` pointing to the second VMs internal address.
+- Add a second static route - `203.0.113.60` -> `vwan_internal_60`
+- Update LAN rules accordingly.
+
 ### Closing notes
 
 That's it - now you’ve got a host behind pfSense using a VPS's secondary public IPv4 like it was directly on the internet.
