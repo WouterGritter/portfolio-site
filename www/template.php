@@ -10,6 +10,14 @@ function template_head_start($title) {
 
         <title><?= $title ?> | Wouter's Portfolio</title>
 
+        <script>
+            (function() {
+                var pref = localStorage.getItem('theme') || 'auto';
+                var dark = pref === 'dark' || (pref === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                if (dark) document.documentElement.classList.add('dark-theme');
+            })();
+        </script>
+
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFTES63JGM"></script>
         <script>
@@ -34,22 +42,63 @@ function template_head_start($title) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" href="/assets/style.css?3">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="/assets/style.css?4">
 
         <link rel="stylesheet" id="hljs-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
         <script>
-            if (document.body && document.body.classList.contains('dark-theme')) {
-                document.getElementById('hljs-theme').href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css';
-            }
-            document.addEventListener('DOMContentLoaded', function() {
-                if (document.body.classList.contains('dark-theme')) {
-                    document.getElementById('hljs-theme').href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css';
+            (function() {
+                var hljsBase = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/';
+                var modes = ['auto', 'light', 'dark'];
+                var icons = { auto: 'fa-circle-half-stroke', light: 'fa-sun', dark: 'fa-moon' };
+
+                function isDark(pref) {
+                    if (pref === 'dark') return true;
+                    if (pref === 'light') return false;
+                    return window.matchMedia('(prefers-color-scheme: dark)').matches;
                 }
-                document.querySelectorAll('pre code[class*="language-"]').forEach(function(block) {
-                    hljs.highlightElement(block);
+
+                function applyTheme(pref) {
+                    var dark = isDark(pref);
+                    document.documentElement.classList.toggle('dark-theme', dark);
+                    document.getElementById('hljs-theme').href = hljsBase + (dark ? 'github-dark' : 'github') + '.min.css';
+                    var btn = document.getElementById('theme-toggle');
+                    if (btn) {
+                        var icon = btn.querySelector('i');
+                        icon.className = 'fa-solid ' + icons[pref];
+                        btn.title = 'Theme: ' + pref;
+                    }
+                }
+
+                // Apply hljs theme immediately (dark-theme class was set by earlier script)
+                if (document.documentElement.classList.contains('dark-theme')) {
+                    document.getElementById('hljs-theme').href = hljsBase + 'github-dark.min.css';
+                }
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Syntax highlighting
+                    document.querySelectorAll('pre code[class*="language-"]').forEach(function(block) {
+                        hljs.highlightElement(block);
+                    });
+
+                    // Theme toggle button
+                    var current = localStorage.getItem('theme') || 'auto';
+                    var btn = document.getElementById('theme-toggle');
+                    applyTheme(current);
+
+                    btn.addEventListener('click', function() {
+                        var idx = modes.indexOf(current);
+                        current = modes[(idx + 1) % 3];
+                        localStorage.setItem('theme', current);
+                        applyTheme(current);
+                    });
+
+                    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
+                        if (current === 'auto') applyTheme('auto');
+                    });
                 });
-            });
+            })();
         </script>
     <?php
 }
@@ -77,6 +126,7 @@ function template_body_start() {
             <a href="/projects/">Projects</a>
             <a href="/contact/">Contact/Where to Find Me</a>
         </div>
+        <button id="theme-toggle" title="Theme"><i class="fa-solid fa-circle-half-stroke"></i></button>
         <div class="content-container">
             <div class="content">
     <?php
