@@ -26,8 +26,9 @@ foreach ($remove_extensions as $extension) {
 
 $redirects = array(
     '/index' => '/',
-    '/my-latest-posts' => '/projects/',
-    '/blog' => '/projects/',
+    '/my-latest-posts' => '/posts/',
+    '/blog' => '/posts/',
+    '/projects' => '/posts/',
     '/2019/01/29/esp8266-lamp-project' => '/posts/esp8266-lamp-project/',
     '/2020/07/14/advanced-csgo-in-real-life-bomb' => '/posts/csgo-bomb-irl/',
     '/2020/07/21/how-i-got-the-csgo-bomb-beep-pattern' => '/posts/csgo-bomb-beep-pattern/',

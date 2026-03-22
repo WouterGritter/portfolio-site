@@ -3,7 +3,7 @@
 include_once "template.php";
 include_once "renderer.php";
 
-template_head_start('Projects');
+template_head_start('Posts');
 ?>
 <style>
     .post {
@@ -17,7 +17,7 @@ template_body_start();
 
 ?>
 
-<h1>Projects</h1>
+<h1>Posts</h1>
 
 <p>Here you can read about some of my projects in a blog-post-style format.</p>
 

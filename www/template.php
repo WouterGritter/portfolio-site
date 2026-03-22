@@ -123,7 +123,7 @@ function template_body_start() {
         <div class="nav-links">
             <a href="/">Home</a>
             <a href="/homelab/">My Homelab</a>
-            <a href="/projects/">Projects</a>
+            <a href="/posts/">Posts</a>
             <a href="/contact/">Contact/Where to Find Me</a>
         </div>
         <button id="theme-toggle" title="Theme"><i class="fa-solid fa-circle-half-stroke"></i></button>
