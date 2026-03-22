@@ -35,6 +35,22 @@ function template_head_start($title) {
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="/assets/style.css?3">
+
+        <link rel="stylesheet" id="hljs-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+        <script>
+            if (document.body && document.body.classList.contains('dark-theme')) {
+                document.getElementById('hljs-theme').href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css';
+            }
+            document.addEventListener('DOMContentLoaded', function() {
+                if (document.body.classList.contains('dark-theme')) {
+                    document.getElementById('hljs-theme').href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css';
+                }
+                document.querySelectorAll('pre code[class*="language-"]').forEach(function(block) {
+                    hljs.highlightElement(block);
+                });
+            });
+        </script>
     <?php
 }
 

@@ -196,6 +196,23 @@ body {
     background-color: var(--table-td-bg);
 }
 
+.content pre {
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.9em;
+}
+
+.content pre code.hljs {
+    border-radius: 6px;
+}
+
+.content :not(pre) > code {
+    background-color: var(--table-th-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
