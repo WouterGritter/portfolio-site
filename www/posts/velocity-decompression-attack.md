@@ -115,6 +115,42 @@ connection itself. The thresholds (95% of cap, 1024:1 ratio, 10 packet limit) ar
 but they worked: no legitimate connections were affected, and the attack was stopped.
 
 
+### Recreating the attack locally
+
+With a fix deployed, the proxy stayed up - but the real attacks were intermittent. I couldn't easily
+tell whether the fix was genuinely working or whether the attacker had just moved on. To verify the
+mitigation was sound, I needed a reliable way to reproduce the attack on demand.
+
+I put together a proof-of-concept Fabric client mod. The core of it is a Mixin on
+`ClientConfigurationPacketListenerImpl` that intercepts `handleConfigurationFinished` and cancels it,
+preventing the client from ever sending `ServerboundFinishConfigurationPacket`. The connection stays
+stuck in CONFIG state indefinitely.
+
+From there, the PoC repeatedly sends oversized unknown packets by writing raw bytes directly into the
+Netty encoder, bypassing Minecraft's normal packet serialization:
+
+```java
+ByteBuf buf = Unpooled.buffer(TARGET_SIZE);
+writeVarInt(buf, 0x7E);  // unknown packet ID in CONFIG state
+buf.writeZero(TARGET_SIZE - buf.readableBytes());
+encoderCtx.writeAndFlush(buf);
+```
+
+Packet ID `0x7E` doesn't exist in the CONFIG protocol. The payload is padded to 99% of Velocity's 8 MiB
+uncompressed cap. The Minecraft client's compression pipeline compresses all those zeros down to almost
+nothing before it goes on the wire - so the packet arrives at Velocity as a tiny blob with a large
+claimed uncompressed size.
+
+Velocity decompresses it, allocating ~8 MB per packet. Then it tries to dispatch it as a CONFIG-state
+packet. Before the fix, unknown packets in the login and config states weren't rejected - Velocity would
+just pass them through, meaning nothing stopped the allocation from happening on every single packet.
+Flooding the proxy with these at any reasonable rate was enough to exhaust memory within seconds.
+
+This is what PR #1743 specifically addresses with its unknown packet rejection: packets with unrecognised
+IDs during login and config are now rejected outright, and the connection is closed. With that in place,
+the PoC's first packet kills the connection rather than leaking memory.
+
+
 ### Getting fixes into upstream Velocity
 
 I filed [issue #1742](https://github.com/PaperMC/Velocity/issues/1742) on the upstream Velocity repository
