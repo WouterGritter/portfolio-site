@@ -1,6 +1,29 @@
 <?php
 
+// Cache-busting query string for our own static assets (Cloudflare caches them).
+// On the live site this is the short git commit hash baked into the image, so it
+// changes on every publish. During development (no hash set) a random string is
+// generated per request, so assets are never served stale.
+function asset_version() {
+    static $version = null;
+    if ($version === null) {
+        $commit = getenv('GIT_COMMIT');
+        if ($commit !== false && $commit !== '') {
+            $version = $commit;
+        } else {
+            $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-';
+            $random = '';
+            for ($i = 0; $i < 8; $i++) {
+                $random .= $alphabet[random_int(0, strlen($alphabet) - 1)];
+            }
+            $version = 'dev-' . $random;
+        }
+    }
+    return $version;
+}
+
 function template_head_start($title) {
+    $v = asset_version();
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -43,12 +66,12 @@ function template_head_start($title) {
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="/assets/style.css?4">
+        <link rel="stylesheet" href="/assets/style.css?<?= $v ?>">
 
         <link rel="stylesheet" id="hljs-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-        <script src="/assets/theme.js?1"></script>
+        <script src="/assets/theme.js?<?= $v ?>"></script>
     <?php
 }
 

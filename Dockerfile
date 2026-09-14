@@ -4,6 +4,11 @@ FROM trafex/php-nginx:latest
 # Copy over the default nginx config file
 COPY ./default.conf /etc/nginx/conf.d/default.conf
 
+# Short git commit hash of the build, passed in by the build script.
+# Used by template.php to cache-bust static assets. Left empty for dev builds.
+ARG GIT_COMMIT
+ENV GIT_COMMIT=${GIT_COMMIT}
+
 # Set working directory
 WORKDIR /var/www/html
 
