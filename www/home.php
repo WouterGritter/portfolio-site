@@ -81,8 +81,8 @@ $posts = array_slice($posts, 0, 4);
 
 <p style="font-size:0.75em; padding-top:2em;">
     Disclaimer: I use AI to help write my posts. Building these projects is what I love, but I also want to share them with the
-    world, since I believe they can bring real value to the right person. Writing isn't quite my thing though, so tools like
-    LLMs helps me get that story across.
+    world, since I believe they can bring real value to the right person. Writing isn't quite my thing though, so using tools
+    like LLMs helps me get that story across.
 </p>
 
 <?php
