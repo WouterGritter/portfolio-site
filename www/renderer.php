@@ -25,7 +25,18 @@ function render_md_file($file): void {
 
     template_body_start();
     echo $md_html;
+    if (has_comments($file, $md_attributes)) {
+        template_comments(pathinfo($file, PATHINFO_FILENAME));
+    }
     template_body_end();
+}
+
+// Posts get a comment section unless they opt out with <!-- comments = false -->.
+function has_comments($file, array $md_attributes): bool {
+    if (!str_starts_with($file, __DIR__ . '/posts/')) {
+        return false;
+    }
+    return ($md_attributes['comments'] ?? 'true') !== 'false';
 }
 
 function extract_md_attributes($md_text): array {

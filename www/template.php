@@ -1,5 +1,12 @@
 <?php
 
+// Giscus (https://giscus.app) comment settings. Comments are stored as GitHub
+// Discussions in the repository below, one discussion per post.
+const GISCUS_REPO = 'WouterGritter/portfolio-comments';
+const GISCUS_REPO_ID = 'R_kgDOUdaHsg';
+const GISCUS_CATEGORY = 'Comments';
+const GISCUS_CATEGORY_ID = 'DIC_kwDOUdaHss4DFvD_';
+
 // Cache-busting query string for our own static assets (Cloudflare caches them).
 // On the live site this is the short git commit hash baked into the image, so it
 // changes on every publish. During development (no hash set) a random string is
@@ -99,6 +106,35 @@ function template_body_start() {
         <button id="theme-toggle" title="Theme"><i class="fa-solid fa-circle-half-stroke"></i></button>
         <div class="content-container">
             <div class="content">
+    <?php
+}
+
+// Comment section for a post. $term identifies the post (the post slug) and is
+// the title of the matching GitHub Discussion. The giscus script itself is
+// injected by theme.js so it can be given the active theme up front.
+function template_comments($term) {
+    if (GISCUS_REPO_ID === '' || GISCUS_CATEGORY_ID === '') {
+        return;
+    }
+    ?>
+    <hr>
+    <h2 id="comments">Comments</h2>
+    <div class="giscus"
+         data-repo="<?= htmlspecialchars(GISCUS_REPO) ?>"
+         data-repo-id="<?= htmlspecialchars(GISCUS_REPO_ID) ?>"
+         data-category="<?= htmlspecialchars(GISCUS_CATEGORY) ?>"
+         data-category-id="<?= htmlspecialchars(GISCUS_CATEGORY_ID) ?>"
+         data-mapping="specific"
+         data-term="<?= htmlspecialchars($term) ?>"
+         data-strict="1"
+         data-reactions-enabled="1"
+         data-emit-metadata="0"
+         data-input-position="top"
+         data-lang="en"
+         data-loading="lazy">
+        <noscript>Comments require JavaScript. You can also leave one directly at
+            <a href="https://github.com/<?= htmlspecialchars(GISCUS_REPO) ?>/discussions">github.com/<?= htmlspecialchars(GISCUS_REPO) ?>/discussions</a>.</noscript>
+    </div>
     <?php
 }
 

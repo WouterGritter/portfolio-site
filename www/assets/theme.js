@@ -9,10 +9,40 @@
         return window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
 
+    function giscusTheme(dark) {
+        return dark ? 'dark' : 'light';
+    }
+
+    // Tell an already loaded giscus comment frame to switch theme.
+    function updateGiscusTheme(dark) {
+        var frame = document.querySelector('iframe.giscus-frame');
+        if (!frame) return;
+        frame.contentWindow.postMessage({ giscus: { setConfig: { theme: giscusTheme(dark) } } }, 'https://giscus.app');
+    }
+
+    // Load the giscus comment widget into the .giscus container emitted by
+    // template.php. Done here instead of in the HTML so the script tag can be
+    // given the active theme, which giscus only reads at load time.
+    function loadGiscus() {
+        var container = document.querySelector('.giscus');
+        if (!container) return;
+
+        var script = document.createElement('script');
+        script.src = 'https://giscus.app/client.js';
+        script.async = true;
+        script.crossOrigin = 'anonymous';
+        Object.keys(container.dataset).forEach(function(key) {
+            script.dataset[key] = container.dataset[key];
+        });
+        script.dataset.theme = giscusTheme(document.documentElement.classList.contains('dark-theme'));
+        container.appendChild(script);
+    }
+
     function applyTheme(pref) {
         var dark = isDark(pref);
         document.documentElement.classList.toggle('dark-theme', dark);
         document.getElementById('hljs-theme').href = hljsBase + (dark ? 'github-dark' : 'github') + '.min.css';
+        updateGiscusTheme(dark);
         var btn = document.getElementById('theme-toggle');
         if (btn) {
             var icon = btn.querySelector('i');
@@ -74,6 +104,7 @@
         var current = localStorage.getItem('theme') || 'auto';
         var btn = document.getElementById('theme-toggle');
         applyTheme(current);
+        loadGiscus();
 
         btn.addEventListener('click', function() {
             var idx = modes.indexOf(current);
